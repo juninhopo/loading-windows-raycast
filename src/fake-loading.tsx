@@ -32,9 +32,12 @@ export default function Command() {
 }
 
 function FileItem(props: { file: string }) {
+  // Extract base filename without extension
+  const fileName = basename(props.file).replace(/\.\w+$/, '');
+  
   return (
     <Grid.Item
-      title={basename(props.file)}
+      title={fileName}
       content={props.file}
       actions={
         <ActionPanel>
