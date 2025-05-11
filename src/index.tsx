@@ -30,7 +30,7 @@ const loadingScreens = [
     id: "my-computer",
     name: "My Computer",
     path: join(homedir(), "Developer", "loading-windows-raycast", "assets", "loadings", "my-computer.gif"),
-  }
+  },
 ];
 
 export default function Command(): React.ReactElement {
@@ -153,4 +153,4 @@ end tell
     console.error("Error opening file:", error);
     await showHUD("Error showing Fake Loading");
   }
-} 
+}
