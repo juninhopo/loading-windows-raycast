@@ -5,7 +5,10 @@
   "description": "Display fake loading screens in fullscreen",
   "icon": "assets/icon.png",
   "owner": "juninhopo",
-  "author": "juninhopo <kelgaxd@gmail.com>",
+  "author": {
+    "name": "Darlan Junior",
+    "url": "https://github.com/juninhopo"
+  },
   "categories": [
     "Design Tools"
   ],
