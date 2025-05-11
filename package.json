@@ -4,6 +4,7 @@
   "title": "Fake Loading",
   "description": "Display fake loading screens in fullscreen",
   "icon": "assets/icon.png",
+  "owner": "juninhopo",
   "author": "juninhopo <kelgaxd@gmail.com>",
   "categories": [
     "Design Tools"
