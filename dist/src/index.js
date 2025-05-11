@@ -10,7 +10,7 @@ import { tmpdir } from "os";
 const execPromise = promisify(exec);
 
 // Our own implementation of showFailureToast
-async function showFailureToast(error: unknown, options?: { title?: string }) {
+async function showFailureToast(error, options) {
   const toast = await showToast({
     style: Toast.Style.Failure,
     title: options?.title || "Something went wrong",
@@ -20,14 +20,10 @@ async function showFailureToast(error: unknown, options?: { title?: string }) {
   return toast;
 }
 
-interface LoadingScreen {
-  id: string;
-  name: string;
-  path: string;
-}
+
 
 // Sample loading screens
-const loadingScreens: LoadingScreen[] = [
+const loadingScreens = [
   {
     id: "windows",
     name: "Windows XP Loading",
@@ -68,7 +64,7 @@ export default function Command() {
   );
 }
 
-async function showLoading(file: string) {
+async function showLoading(file) {
   try {
     // Create a temporary HTML file that will display the GIF in true fullscreen
     const htmlFilePath = join(tmpdir(), "fullscreen-viewer.html");

@@ -1,13 +1,9 @@
-import { ActionPanel, List, Action, showHUD, closeMainWindow, showToast, Toast } from "@raycast/api";
-import React from "react";
-import { homedir } from "os";
+import { showToast, Toast, List, ActionPanel, Action, showHUD, closeMainWindow } from "@raycast/api";
+import { homedir, tmpdir } from "os";
 import { join } from "path";
+import { writeFileSync } from "fs";
 import { exec } from "child_process";
 import { promisify } from "util";
-import { writeFileSync } from "fs";
-import { tmpdir } from "os";
-
-const execPromise = promisify(exec);
 
 // Our own implementation of showFailureToast
 async function showFailureToast(error: unknown, options?: { title?: string }) {
@@ -16,18 +12,14 @@ async function showFailureToast(error: unknown, options?: { title?: string }) {
     title: options?.title || "Something went wrong",
     message: error instanceof Error ? error.message : String(error),
   });
-
+  
   return toast;
 }
 
-interface LoadingScreen {
-  id: string;
-  name: string;
-  path: string;
-}
+const execPromise = promisify(exec);
 
 // Sample loading screens
-const loadingScreens: LoadingScreen[] = [
+const loadingScreens = [
   {
     id: "windows",
     name: "Windows XP Loading",

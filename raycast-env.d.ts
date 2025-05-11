@@ -13,12 +13,12 @@ type ExtensionPreferences = {}
 declare type Preferences = ExtensionPreferences
 
 declare namespace Preferences {
-  /** Preferences accessible in the `fake-loading` command */
-  export type FakeLoading = ExtensionPreferences & {}
+  /** Preferences accessible in the `index` command */
+  export type Index = ExtensionPreferences & {}
 }
 
 declare namespace Arguments {
-  /** Arguments passed to the `fake-loading` command */
-  export type FakeLoading = {}
+  /** Arguments passed to the `index` command */
+  export type Index = {}
 }
 
