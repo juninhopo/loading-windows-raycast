@@ -14,10 +14,10 @@ export default function Command() {
     .filter((item) => statSync(item).isDirectory());
 
   // Collect all files from all directories
-  const allFiles = dirs.flatMap((dir) => 
+  const allFiles = dirs.flatMap((dir) =>
     readdirSync(dir)
       .map((item) => join(dir, item))
-      .filter((item) => statSync(item).isFile())
+      .filter((item) => statSync(item).isFile()),
   );
 
   return (
@@ -33,8 +33,8 @@ export default function Command() {
 
 function FileItem(props: { file: string }) {
   // Extract base filename without extension
-  const fileName = basename(props.file).replace(/\.\w+$/, '');
-  
+  const fileName = basename(props.file).replace(/\.\w+$/, "");
+
   return (
     <Grid.Item
       title={fileName}
@@ -128,9 +128,9 @@ function FakeLoadingAction(props: { file: string }) {
 </body>
 </html>
           `;
-          
+
           writeFileSync(htmlFilePath, htmlContent);
-          
+
           // Use AppleScript to open Chrome in true fullscreen mode
           const appleScript = `
 tell application "Google Chrome"
@@ -142,13 +142,13 @@ tell application "Google Chrome"
   end tell
 end tell
           `;
-          
+
           const tempScriptPath = join(tmpdir(), "open-fullscreen.scpt");
           writeFileSync(tempScriptPath, appleScript);
-          
+
           // Execute the AppleScript
           await execPromise(`osascript "${tempScriptPath}"`);
-          
+
           closeMainWindow();
           showHUD("Fake Loading Activated");
         } catch (error) {
@@ -159,4 +159,3 @@ end tell
     />
   );
 }
-
