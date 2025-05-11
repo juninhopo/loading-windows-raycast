@@ -65,49 +65,60 @@ function DisplayFullScreenAction(props: { file: string }) {
       padding: 0;
       height: 100%;
       width: 100%;
-      background-color: black;
+      background-color: #000;
       overflow: hidden;
     }
-    img {
+    .fullscreen-container {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    /* Add a click handler to exit */
-    .exit-notice {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      color: white;
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-family: sans-serif;
-      font-size: 12px;
+    .gif {
+      width: 100vw;
+      height: 100vh;
+      object-fit: fill; /* This fills the entire screen */
+      position: absolute;
+      top: 0;
+      left: 0;
     }
   </style>
 </head>
 <body>
-  <img src="file://${props.file}" alt="Fullscreen GIF">
-  <div class="exit-notice">Press ESC to exit fullscreen</div>
+  <div class="fullscreen-container">
+    <img class="gif" src="file://${props.file}" alt="Fullscreen GIF">
+  </div>
   <script>
-    // Auto-enter fullscreen
-    document.addEventListener('DOMContentLoaded', function() {
-      document.documentElement.requestFullscreen().catch(e => {
-        console.error('Error attempting to enable fullscreen:', e);
-      });
+    // Enter fullscreen on load
+    window.onload = function() {
+      // Go fullscreen immediately
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen();
+      }
+      
+      // Make sure no cursor is visible
+      document.body.style.cursor = 'none';
+    }
+    
+    // Handle click anywhere to exit
+    document.addEventListener('click', function() {
+      window.close();
     });
     
-    // Add ESC key listener to exit
+    // Handle ESC key
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        if (document.fullscreenElement) {
-          document.exitFullscreen();
-          setTimeout(() => window.close(), 100);
-        }
+        window.close();
       }
     });
   </script>
@@ -117,11 +128,23 @@ function DisplayFullScreenAction(props: { file: string }) {
           
           writeFileSync(htmlFilePath, htmlContent);
           
-          // Open the HTML file in the default browser in fullscreen
-          await execPromise(`open -a "Google Chrome" "${htmlFilePath}" --args --start-fullscreen`).catch(() => {
-            // Fall back to Safari if Chrome isn't available
-            return execPromise(`open -a "Safari" "${htmlFilePath}"`);
-          });
+          // Use AppleScript to open Chrome in true fullscreen mode
+          const appleScript = `
+tell application "Google Chrome"
+  activate
+  open location "file://${htmlFilePath}"
+  delay 0.5
+  tell application "System Events"
+    keystroke "f" using {command down, control down}
+  end tell
+end tell
+          `;
+          
+          const tempScriptPath = join(tmpdir(), "open-fullscreen.scpt");
+          writeFileSync(tempScriptPath, appleScript);
+          
+          // Execute the AppleScript
+          await execPromise(`osascript "${tempScriptPath}"`);
           
           closeMainWindow();
           showHUD("Opened in full screen");
