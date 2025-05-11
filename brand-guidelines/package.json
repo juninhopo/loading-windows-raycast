@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "loading-windows-raycast",
-  "title": "Loading Windows",
-  "description": "Your brand's colors, logos, and other assets quickly available",
+  "name": "fake-loading",
+  "title": "Fake Loading",
+  "description": "Display fake loading screens in fullscreen",
   "icon": "icon.png",
   "author": "juninhopo <kelgaxd@gmail.com>",
   "categories": [
@@ -11,9 +11,9 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "loading-windows",
-      "title": "Loading Windows",
-      "description": "Shows the loading windows of Windows 11",
+      "name": "fake-loading",
+      "title": "Fake Loading",
+      "description": "Display fake loading screens in fullscreen",
       "mode": "view"
     }
   ],

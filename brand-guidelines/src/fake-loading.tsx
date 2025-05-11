@@ -22,7 +22,7 @@ export default function Command() {
 
   return (
     <Grid columns={4}>
-      <Grid.Section title="Select Loading">
+      <Grid.Section title="Fake Loading">
         {allFiles.map((file) => (
           <FileItem key={file} file={file} />
         ))}
@@ -38,17 +38,17 @@ function FileItem(props: { file: string }) {
       content={props.file}
       actions={
         <ActionPanel>
-          <DisplayFullScreenAction file={props.file} />
+          <FakeLoadingAction file={props.file} />
         </ActionPanel>
       }
     />
   );
 }
 
-function DisplayFullScreenAction(props: { file: string }) {
+function FakeLoadingAction(props: { file: string }) {
   return (
     <Action
-      title="Display Full Screen"
+      title="Show Fake Loading"
       icon={Icon.Eye}
       onAction={async () => {
         try {
@@ -147,10 +147,10 @@ end tell
           await execPromise(`osascript "${tempScriptPath}"`);
           
           closeMainWindow();
-          showHUD("Opened in full screen");
+          showHUD("Fake Loading Activated");
         } catch (error) {
           console.error("Error opening file:", error);
-          showHUD("Error opening file");
+          showHUD("Error showing Fake Loading");
         }
       }}
     />
