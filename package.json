@@ -5,6 +5,7 @@
   "description": "Display fake loading screens in fullscreen",
   "icon": "icon.png",
   "author": "darlan_junior",
+  "access": "public",
   "categories": [
     "Design Tools"
   ],
