@@ -1,21 +1,39 @@
 {
-  "name": "loading-windows-raycast",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "fake-loading",
+  "title": "Fake Loading",
+  "description": "Display fake loading screens in fullscreen",
+  "icon": "assets/icon.png",
+  "author": "juninhopo <kelgaxd@gmail.com>",
+  "categories": [
+    "Design Tools"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "fake-loading",
+      "title": "Fake Loading",
+      "description": "Display fake loading screens in fullscreen",
+      "mode": "view"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "latest",
+    "title-case": "^3.0.3"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^1.0.6",
+    "@types/node": "18.18.4",
+    "@types/react": "18.2.27",
+    "eslint": "^8.51.0",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/juninhopo/loading-windows-raycast.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/juninhopo/loading-windows-raycast/issues"
-  },
-  "homepage": "https://github.com/juninhopo/loading-windows-raycast#readme"
+    "build": "ray build -e dist",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint",
+    "publish": "ray publish"
+  }
 }
