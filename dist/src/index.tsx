@@ -40,6 +40,11 @@ const loadingScreens = [
     name: "My Computer",
     path: join(homedir(), "Developer", "loading-windows-raycast", "assets", "loadings", "my-computer.gif"),
   },
+  {
+    id: "mac-update",
+    name: "Mac Update",
+    path: join(homedir(), "Developer", "loading-windows-raycast", "assets", "loadings", "mac-update.gif"),
+  },
 ];
 
 export default function Command() {
